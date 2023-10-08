@@ -1,6 +1,7 @@
 package edu.greenriver.sdev.exampleprogram.controllers;
 
 import edu.greenriver.sdev.exampleprogram.model.WeatherReading;
+import edu.greenriver.sdev.exampleprogram.services.WeatherService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,14 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class WeatherApi
 {
+    //this field is assigned using dependency injection
+    private WeatherService service;
+
+    public WeatherApi(WeatherService service)
+    {
+        this.service = service;
+    }
+
     /**
      * Return some weather data (not a web page).
      * This is a web-address (URL) and an HTTP verb
@@ -30,17 +39,12 @@ public class WeatherApi
     @GetMapping(path = "weather")
     public List<WeatherReading> getReadings()
     {
-        return List.of(
-            new WeatherReading("10/10/21 9pm", "Spokane", "Clear Skies", 70.0),
-            new WeatherReading("12/1/16 2pm", "Tacoma", "Snow", 24.0),
-            new WeatherReading("3/3/22 4pm", "Puyallup", "Rain", 66.0),
-            new WeatherReading("2/1/23 10pm", "Puyallup", "Rain", 68.0)
-        );
+        return service.getAllReadings();
     }
 
     @GetMapping(path = "temps")
     public List<Double> getAllTemps()
     {
-        return List.of(70.0, 24.0, 66.0, 68.0);
+        return service.getAllTemps();
     }
 }
