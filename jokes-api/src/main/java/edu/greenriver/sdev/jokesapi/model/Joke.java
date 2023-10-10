@@ -16,9 +16,13 @@ public class Joke
 
     public Joke(String jokeText)
     {
+        generateId();
+        this.jokeText = jokeText;
+    }
+
+    public void generateId()
+    {
         id = classIds;
         classIds++;
-
-        this.jokeText = jokeText;
     }
 }

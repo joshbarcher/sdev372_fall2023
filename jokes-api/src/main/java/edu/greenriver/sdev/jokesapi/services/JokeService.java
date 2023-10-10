@@ -44,15 +44,23 @@ public class JokeService
         return jokes.get(random.nextInt(jokes.size()));
     }
 
-    public void addJoke(Joke joke)
+    public Joke addJoke(Joke joke)
     {
+        //generate a new id for the inserted record
+        joke.generateId();
+
+        //insert the record
         jokes.add(joke);
+
+        //returning the joke with new id
+        return joke;
     }
 
-    public void updateJoke(Joke updatedJoke)
+    public Joke updateJoke(Joke updatedJoke)
     {
         Joke savedJoke = getJokeById(updatedJoke.getId());
         savedJoke.setJokeText(updatedJoke.getJokeText());
+        return savedJoke;
     }
 
     public void deleteJoke(int id)

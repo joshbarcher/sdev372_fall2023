@@ -2,9 +2,7 @@ package edu.greenriver.sdev.jokesapi.controllers;
 
 import edu.greenriver.sdev.jokesapi.model.Joke;
 import edu.greenriver.sdev.jokesapi.services.JokeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +32,24 @@ public class JokesApi
     public Joke getJokeById(@PathVariable int jokeId)
     {
         return service.getJokeById(jokeId);
+    }
+
+    //pass in a new Joke object through the request body
+    @PostMapping("jokes")
+    public Joke addJoke(@RequestBody Joke joke)
+    {
+        return service.addJoke(joke);
+    }
+
+    @PutMapping("jokes")
+    public Joke editJoke(@RequestBody Joke joke)
+    {
+        return service.updateJoke(joke);
+    }
+
+    @DeleteMapping("jokes")
+    public void deleteJoke(@RequestBody Joke joke)
+    {
+        service.deleteJoke(joke.getId());
     }
 }
