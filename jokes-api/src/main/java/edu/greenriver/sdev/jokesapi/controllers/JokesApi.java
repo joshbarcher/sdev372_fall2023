@@ -2,6 +2,8 @@ package edu.greenriver.sdev.jokesapi.controllers;
 
 import edu.greenriver.sdev.jokesapi.model.Joke;
 import edu.greenriver.sdev.jokesapi.services.JokeService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +19,9 @@ public class JokesApi
     }
 
     @GetMapping("jokes") //http://localhost:8080/jokes
-    public List<Joke> allJokes()
+    public ResponseEntity<List<Joke>> allJokes()
     {
-        return service.getAllJokes();
+        return new ResponseEntity<>(service.getAllJokes(), HttpStatus.OK);
     }
 
     @GetMapping("jokes/random")
@@ -36,9 +38,9 @@ public class JokesApi
 
     //pass in a new Joke object through the request body
     @PostMapping("jokes")
-    public Joke addJoke(@RequestBody Joke joke)
+    public ResponseEntity<Joke> addJoke(@RequestBody Joke joke)
     {
-        return service.addJoke(joke);
+        return new ResponseEntity<>(service.addJoke(joke), HttpStatus.CREATED);
     }
 
     @PutMapping("jokes")
