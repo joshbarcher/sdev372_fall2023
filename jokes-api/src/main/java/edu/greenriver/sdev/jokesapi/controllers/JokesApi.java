@@ -21,37 +21,56 @@ public class JokesApi
     @GetMapping("jokes") //http://localhost:8080/jokes
     public ResponseEntity<List<Joke>> allJokes()
     {
-        return new ResponseEntity<>(service.getAllJokes(), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAllJokes(), HttpStatus.OK); //200
     }
 
     @GetMapping("jokes/random")
-    public Joke random()
+    public ResponseEntity<Joke> random()
     {
-        return service.random();
+        return new ResponseEntity<>(service.random(), HttpStatus.OK); //200
     }
 
     @GetMapping("jokes/{jokeId}") //http://localhost:8080/jokes/3
-    public Joke getJokeById(@PathVariable int jokeId)
+    public ResponseEntity<Joke> getJokeById(@PathVariable int jokeId)
     {
-        return service.getJokeById(jokeId);
+        return new ResponseEntity<>(service.getJokeById(jokeId), HttpStatus.OK); //200
     }
 
     //pass in a new Joke object through the request body
     @PostMapping("jokes")
     public ResponseEntity<Joke> addJoke(@RequestBody Joke joke)
     {
-        return new ResponseEntity<>(service.addJoke(joke), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.addJoke(joke), HttpStatus.CREATED); //201
+    }
+
+    //http://localhost:8080/jokes/query?author=josh&text=hello,world!
+    @PostMapping("jokes/query")
+    public ResponseEntity<Joke> addJoke(@RequestParam String author, @RequestParam String text)
+    {
+        Joke newJoke = new Joke(author + ": " + text);
+        return new ResponseEntity<>(service.addJoke(newJoke), HttpStatus.CREATED); //201
     }
 
     @PutMapping("jokes")
-    public Joke editJoke(@RequestBody Joke joke)
+    public ResponseEntity<Joke> editJoke(@RequestBody Joke joke)
     {
-        return service.updateJoke(joke);
+        if (!service.jokeExistsById(joke.getId()))
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(service.updateJoke(joke), HttpStatus.OK); //200
     }
 
     @DeleteMapping("jokes")
-    public void deleteJoke(@RequestBody Joke joke)
+    public ResponseEntity deleteJoke(@RequestBody Joke joke)
     {
+        if (!service.jokeExistsById(joke.getId()))
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         service.deleteJoke(joke.getId());
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

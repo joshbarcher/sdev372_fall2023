@@ -31,6 +31,11 @@ public class JokeService
         return found.orElse(null);
     }
 
+    public boolean jokeExistsById(int id)
+    {
+        return repo.findById(id).isPresent();
+    }
+
     public Joke random()
     {
         Random random = new Random();
