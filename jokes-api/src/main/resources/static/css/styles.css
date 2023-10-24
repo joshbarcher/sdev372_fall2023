@@ -24,3 +24,17 @@ section#jokes-list {
     display: flex;
     flex-wrap: wrap;
 }
+
+form {
+    margin: 12px;
+    padding-top: 12px;
+}
+
+label, input, button {
+    display: block;
+    margin-bottom: 4px;
+}
+
+label {
+    font-size: 16px;
+}
