@@ -33,12 +33,29 @@ function addCards(jokesArray)
     {
         let joke = jokesArray[i];
 
+        //create HTML elements
+        let div = document.createElement("div");
+        let h1 = document.createElement("h1");
+        let p = document.createElement("p");
+
+        //connect them (parent to child)
+        div.appendChild(h1);
+        div.appendChild(p);
+
+        //add text or HTML attributes
+        h1.textContent = `Joke #${joke.id}`;
+        p.textContent = joke.jokeText;
+        div.className = "card";
+
+        //add the div to the section
+        section.appendChild(div);
+
         //assemble the HTML for a joke using a string-template literal
-        let html = `<div class="card">
+        /*let html = `<div class="card">
                 <h1>Joke #<span id="joke-id">${joke.id}</span></h1>
                 <p id="joke-body">${joke.jokeText}</p>
-            </div>`;
+            </div>`;*/
 
-        section.innerHTML += html; //section.innerHTML = section.innerHTML + html;
+        //section.innerHTML += html; //section.innerHTML = section.innerHTML + html;
     }
 }
