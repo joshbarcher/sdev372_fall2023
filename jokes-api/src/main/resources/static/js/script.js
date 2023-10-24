@@ -11,13 +11,7 @@ async function fetchJokes()
     let config = {
         method: "get"
     };
-
-    //use the await, async keywords to make your
-    //code appear more synchronous
     let response = await fetch(uri, config);
-
-    //convert the body of the response to JSON format
-    //using JSON.parse()
     let json = await response.json();
     addCards(json);
 
@@ -34,6 +28,7 @@ async function fetchJokes()
 function addCards(jokesArray)
 {
     //loop over my array
+    let section = document.querySelector("#jokes-list");
     for (let i = 0; i < jokesArray.length + 1; i++)
     {
         let joke = jokesArray[i];
@@ -44,7 +39,6 @@ function addCards(jokesArray)
                 <p id="joke-body">${joke.jokeText}</p>
             </div>`;
 
-        let section = document.querySelector("#jokes-list");
-        section.innerHTML = html;
+        section.innerHTML += html; //section.innerHTML = section.innerHTML + html;
     }
 }

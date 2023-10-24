@@ -19,3 +19,8 @@ body {
     width: 200px;
     display: block;
 }
+
+section#jokes-list {
+    display: flex;
+    flex-wrap: wrap;
+}

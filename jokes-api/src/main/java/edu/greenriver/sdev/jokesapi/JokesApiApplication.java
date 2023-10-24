@@ -26,6 +26,8 @@ public class JokesApiApplication
             new Joke("What is Admiral Ackbar's favorite type of music? Trap."),
             new Joke("What do you call a rebel princess who only shops at Whole Foods? Leia Organic."),
             new Joke("What do you call an eel that loves the new Star Wars trilogy? A More-Rey Eel."),
+            new Joke("Where did Luke get his cybernetic hand? The second hand store."),
+            new Joke("What do you call an eel that loves the new Star Wars trilogy? A More-Rey Eel."),
             new Joke("Where did Luke get his cybernetic hand? The second hand store.")
         ));
 
