@@ -1,0 +1,21 @@
+html {
+    background-color: beige;
+}
+
+/* create a fixed layout with the page */
+body {
+    width: 1000px;
+    margin: auto;
+    background-color: lightblue;
+}
+
+/* create "cards" for each joke */
+.card {
+    border: 2px solid darkblue;
+    padding: 8px;
+    margin: 12px;
+    background-color: beige;
+
+    width: 200px;
+    display: block;
+}
