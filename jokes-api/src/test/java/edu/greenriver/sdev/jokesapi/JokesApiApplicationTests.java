@@ -45,5 +45,6 @@ class JokesApiApplicationTests
         Joke[] jokes = response.getBody();
 
         assertEquals(status, HttpStatus.OK);
+        assertTrue(jokes.length > 0);
     }
 }
