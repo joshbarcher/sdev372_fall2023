@@ -34,6 +34,11 @@ public class JokesApi
     @GetMapping("jokes/{jokeId}") //http://localhost:8080/jokes/3
     public ResponseEntity<Joke> getJokeById(@PathVariable int jokeId)
     {
+        if (!service.jokeExistsById(jokeId))
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         return new ResponseEntity<>(service.getJokeById(jokeId), HttpStatus.OK); //200
     }
 
