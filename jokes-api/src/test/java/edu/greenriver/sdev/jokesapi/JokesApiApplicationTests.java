@@ -13,12 +13,37 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class JokesApiApplicationTests
 {
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private TestRestTemplate rest;
+
     @Test
     public void contextLoads()
     {
 
+    }
+
+    @Test
+    public void getAllJokes()
+    {
+        String endpoint = "http://localhost:" + port + "/jokes";
+
+        //assemble a request
+        HttpEntity request = new HttpEntity(new HttpHeaders());
+
+        //make the request and get a response
+        ResponseEntity<Joke[]> response = rest.exchange(endpoint, HttpMethod.GET,
+                request, Joke[].class);
+
+        //test it!
+        HttpStatusCode status = response.getStatusCode();
+        Joke[] jokes = response.getBody();
+
+        assertEquals(status, HttpStatus.OK);
     }
 }
